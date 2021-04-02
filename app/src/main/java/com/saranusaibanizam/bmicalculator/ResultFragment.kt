@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.saranusaibanizam.bmicalculator.databinding.FragmentResultBinding
 
 
@@ -17,10 +18,18 @@ class ResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentResultBinding.inflate(inflater)
-        binding.statusTV.text=inputViewModel.statusString
-        binding.bmiTV.text=inputViewModel.bmiString
-        binding.weightTV.text=inputViewModel.weightString
-        binding.heightTV.text=inputViewModel.heightString
+        inputViewModel.statusString.observe(viewLifecycleOwner, Observer {
+            binding.statusTV.text=it
+        })
+        inputViewModel.bmiString.observe(viewLifecycleOwner, Observer {
+            binding.bmiTV.text=it
+        })
+        inputViewModel.weightString.observe(viewLifecycleOwner, Observer {
+            binding.weightTV.text=it
+        })
+        inputViewModel.heightString.observe(viewLifecycleOwner, Observer {
+            binding.heightTV.text=it
+        })
         return binding.root
     }
 

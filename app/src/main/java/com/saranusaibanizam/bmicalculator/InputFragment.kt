@@ -13,6 +13,9 @@ import com.saranusaibanizam.bmicalculator.databinding.FragmentInputBinding
 
 
 class InputFragment : Fragment() {
+    var weightInKG=0
+    var feet=0
+    var inches=0
     private lateinit var binding:FragmentInputBinding
     private val inputViewModel: InputViewModel by activityViewModels()
     override fun onCreateView(
@@ -20,14 +23,19 @@ class InputFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentInputBinding.inflate(inflater)
-        var weightInKG=50
-        var feet=5
-        var inches=0
-        binding.weightCounter.setNumber("50",true)
+        if(weightInKG==0){
+            binding.weightCounter.setNumber("50",true)
+            weightInKG=50
+            binding.feetCounter.setNumber("5",true)
+            feet=5
+        }else{
+            binding.weightCounter.setNumber(weightInKG.toString(),true)
+            binding.feetCounter.setNumber(feet.toString(),true)
+            binding.inchCounter.setNumber(inches.toString(),true)
+        }
         binding.weightCounter.setOnValueChangeListener { view, oldValue, newValue ->
             weightInKG = newValue
         }
-        binding.feetCounter.setNumber("5",true)
         binding.feetCounter.setOnValueChangeListener { view, oldValue, newValue ->
             feet = newValue
         }
@@ -37,7 +45,7 @@ class InputFragment : Fragment() {
         }
         binding.calculateBtn.setOnClickListener {
             inputViewModel.calculateBMI(weightInKG,feet,inches)
-            findNavController().navigate(R.id.resultFragment)
+            findNavController().navigate(R.id.action_inputFragment_to_resultFragment)
         }
         return binding.root
     }

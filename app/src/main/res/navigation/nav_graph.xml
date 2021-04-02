@@ -10,4 +10,9 @@
         android:name="com.saranusaibanizam.bmicalculator.InputFragment"
         android:label="fragment_input"
         tools:layout="@layout/fragment_input" />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.saranusaibanizam.bmicalculator.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" />
 </navigation>
